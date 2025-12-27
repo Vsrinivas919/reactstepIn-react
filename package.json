@@ -1,0 +1,26 @@
+{
+  "name": "javascript",
+  "version": "1.0.0",
+  "description": "'this is react'",
+  "scripts": {
+    "start":"parcel index.html",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vsrinivas919/reactstepIn-react.git"
+  },
+  "author": "Srinivas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vsrinivas919/reactstepIn-react/issues"
+  },
+  "homepage": "https://github.com/Vsrinivas919/reactstepIn-react#readme",
+  "devDependencies": {
+    "parcel": "^2.16.3"
+  },
+  "dependencies": {
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
+  }
+}

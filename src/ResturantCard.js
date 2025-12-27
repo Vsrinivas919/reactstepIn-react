@@ -3,7 +3,6 @@ import { RES_LOGO } from "../utils/constants";
 const ResturantCard = (props) => {
     const { resData } = props;
     const { name, avgRating, cuisines, sla, costForTwo, cloudinaryImageId } = resData?.info
-    console.log("props", props)
     return (
         <div id='res-card'>
 

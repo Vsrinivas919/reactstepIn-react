@@ -1,29 +1,53 @@
 import ResturantCard from "./ResturantCard";
 import { restaurants } from "../utils/mockData";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Shimmer from './Shimmer';
+
 
 const Body = () => {
-    const [filterData, setFilteredData] = useState(restaurants);
+    const [listOfResturants, setListOfResturants] = useState([]);
+    const [filteredResturants, setFilteredResturants] = useState([])
+    const [searchValue, setSearchValue] = useState('');
+
+
+    useEffect(() => {
+        fetchData()
+    }, [])
+
+    const fetchData = async () => {
+        let Data = await fetch('https://www.swiggy.com/dapi/restaurants/list/v5?lat=21.99740&lng=79.00110&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING')
+
+        let jsonData = await Data.json();
+
+        const apiData = jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+        setListOfResturants(apiData)
+        setFilteredResturants(apiData)
+
+    }
+
     return (
         <div id='body'>
             <div id='search'>
-                <input id='text-box' type='text' defaultValue='typing..'></input>
+                <input id='text-box' type='text' value={searchValue} onChange={(e) => { setSearchValue(e.target.value) }}></input>
+                <button onClick={() => {
+
+                    const searchRes = listOfResturants.filter((res) => res.info.name.toLowerCase().includes(searchValue.toLocaleLowerCase()))
+                    setFilteredResturants(searchRes)
+                }
+                }
+                >Search</button>
                 <button id='button' onClick={() => {
                     const resData = restaurants.filter(res => res.info.avgRating > 4.2);
-                    setFilteredData(resData)
-                    console.log(filterData)
-                }}>Search</button>
+                    setListOfResturants(resData)
+                }}>Top Rated Resturants</button>
             </div>
-            <div id='res-container'>
-                {filterData.map((resData) => (
-
-                    <ResturantCard key={resData?.info.id} resData={resData} />
-
-                ))}
-
-
-
-            </div>
+            {filteredResturants.length === 0 ? <Shimmer /> :
+                <div id='res-container'>
+                    {filteredResturants.map((resData) => (
+                        <ResturantCard key={resData?.info.id} resData={resData} />
+                    ))}
+                </div>
+            }
 
         </div>
     )

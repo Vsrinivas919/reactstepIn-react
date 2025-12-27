@@ -1,6 +1,11 @@
 import { APP_LOGO } from '../utils/constants'
+import { useState } from 'react';
+
+
 
 const Header = () => {
+    const [loginFlag, setLoginFlag] = useState(true)
+
     return (
         <div id='header'>
             <div id='logo-container'>
@@ -12,6 +17,13 @@ const Header = () => {
                     <li>ABOUT</li>
                     <li>CONTACT</li>
                     <li>OFFERS</li>
+                    <button id={loginFlag ? 'login-btn' : 'logout-btn'} onClick={() => {
+                        if (loginFlag) {
+                            setLoginFlag(false)
+                        } else {
+                            setLoginFlag(true)
+                        }
+                    }}>{loginFlag ? 'Login' : 'Logout'} </button>
                 </ul>
             </div>
         </div>

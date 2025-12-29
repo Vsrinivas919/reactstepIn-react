@@ -74,3 +74,8 @@
   cursor: pointer;
   background-color: rgb(206, 120, 120);
 }
+
+#user-card {
+  padding: 10px;
+  border: 1px solid black;
+}

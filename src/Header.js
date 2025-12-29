@@ -1,5 +1,6 @@
 import { APP_LOGO } from '../utils/constants'
 import { useState } from 'react';
+import { Link } from 'react-router-dom'
 
 
 
@@ -13,10 +14,14 @@ const Header = () => {
             </div>
             <div id='nav-items'>
                 <ul>
-                    <li>Home</li>
-                    <li>ABOUT</li>
-                    <li>CONTACT</li>
-                    <li>OFFERS</li>
+                    <li>
+                        <Link to='/'>HOME</Link></li>
+                    <li>
+                        <Link to='/About'>ABOUT</Link></li>
+                    <li>
+                        <Link to='/Contact'>CONTACT</Link></li>
+                    <li>
+                        <Link to='/Offers'>OFFERS</Link></li>
                     <button id={loginFlag ? 'login-btn' : 'logout-btn'} onClick={() => {
                         if (loginFlag) {
                             setLoginFlag(false)

@@ -6,22 +6,16 @@ const User = (props) => {
     const [count, setCount] = useState(0);
     const [darkMode, setDarkMode] = useState(false);
 
-    const calculation = () => {
+
+    // Expensive calculation
+    const doubledCount = useMemo(() => {
         console.log("Calculating...");
         let result = 0;
         for (let i = 0; i < 1_000_000_000; i++) {
             result = count * 2;
         }
         return result;
-    }
-
-    // Expensive calculation
-    const doubledCount = useMemo(() => {
-        console.log('jhvqbkqk')
-        return () => {
-            calculation()
-        }
-    }, [count]); // only re-run when `count` changes
+    }, []); // only re-run when `count` changes
 
     const themeStyles = {
         backgroundColor: darkMode ? "#333" : "#fff",
@@ -32,6 +26,7 @@ const User = (props) => {
     return (
         <div style={themeStyles}>
             <h2>Doubled Count: {doubledCount}</h2>
+            <h2>count:{count}</h2>
 
             <button onClick={() => setCount(c => c + 1)}>
                 Increment Count
